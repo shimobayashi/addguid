@@ -1,0 +1,6 @@
+%form{action: './', method: :get}
+  %p
+    %label{for: :url}
+      フィードURL
+    %input{type: :url, name: :url, placeholder: 'http://example.com/feed.xml', size: 100}
+  %input#submit{type: :submit}
