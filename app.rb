@@ -39,7 +39,7 @@ class AddGuid < Sinatra::Base
     rss = RSS::Maker.make('2.0') do |rss|
       rss.channel.title = feed.title
       rss.channel.description = feed.description
-      rss.channel.link = feed.url
+      rss.channel.link = "#{to('/')}?#{request.query_string}"
 
       feed.entries.each do |entry|
         item = rss.items.new_item
