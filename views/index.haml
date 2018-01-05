@@ -5,6 +5,14 @@
     %input{type: :url, name: :url, placeholder: 'http://example.com/feed.xml', size: 100}
   %p
     %label{for: :link}
-      フィードのリンクURLをguidの生成に利用する
+      エントリーのリンクURLをguidの生成に利用する
     %input{type: :checkbox, name: :link}
+  %p
+    %label{for: :title}
+      エントリーのタイトルをguidの生成に利用する
+    %input{type: :checkbox, name: :title}
+  %p
+    %label{for: :description}
+      エントリーの本文をguidの生成に利用する
+    %input{type: :checkbox, name: :description}
   %input#submit{type: :submit}

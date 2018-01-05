@@ -18,6 +18,12 @@ class AddGuid < Sinatra::Base
         if params[:link]
           seed += entry.url
         end
+        if params[:title]
+          seed += entry.title
+        end
+        if params[:description]
+          seed += entry.content
+        end
 
         # entry.idを存否の確認をせずに上書きする。
         entry.id = Digest::MD5.hexdigest(seed)
