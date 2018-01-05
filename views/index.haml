@@ -2,25 +2,25 @@
   %p
     %label{for: :url}
       フィードURL
-    %input{type: :url, name: :url, placeholder: 'http://example.com/feed.xml', size: 100}
+    %input{type: :url, name: :url, placeholder: 'http://example.com/feed.xml', size: 100, value: @options[:url]}
   %p
     %label{for: :link}
       エントリーのリンクURLをguidの生成に利用する
-    %input{type: :checkbox, name: :link}
+    %input{type: :checkbox, name: :link, checked: @options[:link]}
   %p
     %label{for: :title}
       エントリーのタイトルをguidの生成に利用する
-    %input{type: :checkbox, name: :title}
+    %input{type: :checkbox, name: :title, checked: @options[:title]}
   %p
     %label{for: :description}
       エントリーの本文をguidの生成に利用する
-    %input{type: :checkbox, name: :description}
+    %input{type: :checkbox, name: :description, checked: @options[:description]}
   %p
     %label{for: :date}
       エントリーの日時をguidの生成に利用する
-    %input{type: :checkbox, name: :date}
+    %input{type: :checkbox, name: :date, checked: @options[:date]}
   %p
     %label{for: :guid}
       エントリーのguidをguidの生成に利用する
-    %input{type: :checkbox, name: :guid}
+    %input{type: :checkbox, name: :guid, checked: @options[:guid]}
   %input#submit{type: :submit}

@@ -8,27 +8,29 @@ class AddGuid < Sinatra::Base
   enable :show_exceptions
 
   get '/' do
+    @options = get_options(params)
     haml :index
   end
 
   get '/feed' do
-    feed = FeedNormalizer::FeedNormalizer.parse open(params[:url])
+    options = get_options(params)
+    feed = FeedNormalizer::FeedNormalizer.parse open(options[:url])
     feed.entries.each do |entry|
       # guidに相当する文字列を渡されたオプションからよしなに生成する。
       seed = ''
-      if params[:link]
+      if options[:link]
         seed += entry.url
       end
-      if params[:title]
+      if options[:title]
         seed += entry.title
       end
-      if params[:description]
+      if options[:description]
         seed += entry.content
       end
-      if params[:date]
+      if options[:date]
         seed += entry.date_published.to_s
       end
-      if params[:guid]
+      if options[:guid]
         seed += entry.id ? entry.id : ''
       end
 
@@ -55,5 +57,16 @@ class AddGuid < Sinatra::Base
 
     content_type 'application/rss+xml', :charset => 'utf-8'
     rss.to_s
+  end
+
+  def get_options(params)
+    options = {}
+
+    options[:url] = params[:url]
+    [:link, :title, :description, :date, :guid].each do |key|
+      options[key] = (params[key] == 'on')
+    end
+
+    return options
   end
 end
