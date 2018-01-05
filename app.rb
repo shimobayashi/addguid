@@ -27,6 +27,9 @@ class AddGuid < Sinatra::Base
         if params[:date]
           seed += entry.date_published.to_s
         end
+        if params[:guid]
+          seed += entry.id ? entry.id : ''
+        end
 
         # entry.idを存否の確認をせずに上書きする。
         entry.id = Digest::MD5.hexdigest(seed)
