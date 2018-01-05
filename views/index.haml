@@ -3,4 +3,8 @@
     %label{for: :url}
       フィードURL
     %input{type: :url, name: :url, placeholder: 'http://example.com/feed.xml', size: 100}
+  %p
+    %label{for: :link}
+      フィードのリンクURLをguidの生成に利用する
+    %input{type: :checkbox, name: :link}
   %input#submit{type: :submit}

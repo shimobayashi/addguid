@@ -2,6 +2,7 @@ require 'sinatra'
 require 'haml'
 require 'feed-normalizer'
 require 'open-uri'
+require 'digest/md5'
 
 class AddGuid < Sinatra::Base
   enable :show_exceptions
@@ -12,9 +13,14 @@ class AddGuid < Sinatra::Base
     else
       feed = FeedNormalizer::FeedNormalizer.parse open(params[:url])
       feed.entries.each do |entry|
+        # guidに相当する文字列を渡されたオプションからよしなに生成する。
+        seed = ''
+        if params[:link]
+          seed += entry.url
+        end
+
         # entry.idを存否の確認をせずに上書きする。
-        # 生成ロジックは後で作り込むことにして、とりあえずurlを突っ込んでおく。
-        entry.id = entry.url
+        entry.id = Digest::MD5.hexdigest(seed)
       end
 
       rss = RSS::Maker.make('2.0') do |rss|
