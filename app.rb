@@ -48,7 +48,6 @@ class AddGuid < Sinatra::Base
         item.title = entry.title
         item.link = entry.url
         item.guid.content = entry.id
-        # 元のフィードでisPermaLinkがどうだったかは保存されていない気がする(要出典)ので、一律でfalseにしておく
         item.guid.isPermaLink = false
         item.description = entry.content
         item.date = entry.date_published
