@@ -18,20 +18,20 @@ class AddGuid < Sinatra::Base
     feed.entries.each do |entry|
       # guidに相当する文字列を渡されたオプションからよしなに生成する。
       seed = ''
-      if options[:link]
+      if options[:link] & entry.url
         seed += entry.url
       end
-      if options[:title]
+      if options[:title] & entry.title
         seed += entry.title
       end
-      if options[:description]
+      if options[:description] & entry.content
         seed += entry.content
       end
-      if options[:date]
+      if options[:date] & entry.date_published
         seed += entry.date_published.to_s
       end
-      if options[:guid]
-        seed += entry.id ? entry.id : ''
+      if options[:guid] & entry.id
+        seed += entry.id
       end
 
       # entry.idを存否の確認をせずに上書きする。
